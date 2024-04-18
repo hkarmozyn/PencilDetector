@@ -20,6 +20,33 @@ public class PencilDetector {
         return resizedImage;
     }
 
+    private static BufferedImage convertToGrayscale(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        BufferedImage grayImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color color = new Color(image.getRGB(x, y));
+                int red = color.getRed();
+                int green = color.getGreen();
+                int blue = color.getBlue();
+                int grayValue = (int) (0.2126 * red + 0.7152 * green + 0.0722 * blue);
+                int grayPixel = (grayValue << 16) | (grayValue << 8) | grayValue;
+                grayImage.setRGB(x, y, grayPixel);
+            }
+        }
+
+        return grayImage;
+    }
+    public static BufferedImage processImage(BufferedImage image) {
+
+        BufferedImage grayImage = convertToGrayscale(image);
+
+        return grayImage;
+    }
+
     public static void main(String[] args) {
 
         try {
