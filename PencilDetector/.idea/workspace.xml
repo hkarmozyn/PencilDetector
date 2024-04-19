@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6810e6d2-9933-4886-8baa-4679d5937775" name="Changes" comment="added methods to take in and resize image">
+    <list default="true" id="6810e6d2-9933-4886-8baa-4679d5937775" name="Changes" comment="added methods to convert to grayscale to help with processing">
+      <change afterPath="$PROJECT_DIR$/pencil.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pencil2.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PencilDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PencilDetector.java" afterDir="false" />
     </list>
@@ -36,6 +38,25 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="PencilDetector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PencilDetector" />
+      <module name="PencilDetector" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PencilDetector" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -59,7 +80,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713291800927</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added methods to convert to grayscale to help with processing">
+      <created>1713455270706</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713455270706</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -76,6 +104,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="added methods to take in and resize image" />
-    <option name="LAST_COMMIT_MESSAGE" value="added methods to take in and resize image" />
+    <MESSAGE value="added methods to convert to grayscale to help with processing" />
+    <option name="LAST_COMMIT_MESSAGE" value="added methods to convert to grayscale to help with processing" />
   </component>
 </project>
