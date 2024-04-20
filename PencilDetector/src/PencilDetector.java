@@ -1,3 +1,8 @@
+/*
+HK
+4/23/24
+CZ
+ */
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -7,11 +12,13 @@ import java.util.Scanner;
 
 public class PencilDetector {
 
+    // Reads an image from a file path
     private static BufferedImage readImage(String filePath) throws IOException {
         File imageFile = new File(filePath);
         return ImageIO.read(imageFile);
     }
 
+    // Resizes the image while maintaining aspect ratio
     private static BufferedImage resizeImage(BufferedImage image, int targetWidth, int targetHeight) {
         int originalWidth = image.getWidth();
         int originalHeight = image.getHeight();
@@ -32,15 +39,16 @@ public class PencilDetector {
         return resizedImage;
     }
 
+    // Processes the image to apply multiple filters
     public static BufferedImage processImage(BufferedImage image) {
-
         BufferedImage grayImage = convertToGrayscale(image);
         BufferedImage gaussianImage = applyGaussianBlur(grayImage);
-        BufferedImage sobelImage[] = applySobelOperator(gaussianImage);
+        BufferedImage[] sobelImage = applySobelOperator(gaussianImage);
 
-        return gaussianImage;
+        return gaussianImage; // Note: Only returns Gaussian-blurred image, ignores Sobel results
     }
 
+    // Converts an image to grayscale
     private static BufferedImage convertToGrayscale(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -62,6 +70,7 @@ public class PencilDetector {
         return grayImage;
     }
 
+    // Applies Gaussian blur using a 3x3 kernel
     private static BufferedImage applyGaussianBlur(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -91,6 +100,7 @@ public class PencilDetector {
         return blurredImage;
     }
 
+    // Applies Sobel operator to detect edges
     private static BufferedImage[] applySobelOperator(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -98,7 +108,6 @@ public class PencilDetector {
         BufferedImage gradientMagnitudeImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         BufferedImage gradientDirectionImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
 
-        // Sobel kernels
         int[][] sobelX = {
                 {-1, 0, 1},
                 {-2, 0, 2},
@@ -134,8 +143,8 @@ public class PencilDetector {
         return new BufferedImage[]{gradientMagnitudeImage, gradientDirectionImage};
     }
 
+    // Main method to handle user interaction and file operations
     public static void main(String[] args) {
-
         try {
             Scanner s = new Scanner(System.in);
             System.out.print("Give file name: ");
@@ -158,12 +167,9 @@ public class PencilDetector {
             ImageIO.write(processedImage, "jpg", outputImageFile);
 
             System.out.println("Processed image saved successfully!");
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 }
-
