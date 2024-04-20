@@ -15,12 +15,15 @@ public class PencilDetector {
     private static BufferedImage resizeImage(BufferedImage image, int targetWidth, int targetHeight) {
         int originalWidth = image.getWidth();
         int originalHeight = image.getHeight();
+
         double aspectRatio = (double) originalWidth / originalHeight;
+
         if (originalWidth > originalHeight) {
             targetHeight = (int) (targetWidth / aspectRatio);
         } else {
             targetWidth = (int) (targetHeight * aspectRatio);
         }
+
         Image tmp = image.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
         BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = resizedImage.createGraphics();
@@ -33,6 +36,7 @@ public class PencilDetector {
 
         BufferedImage grayImage = convertToGrayscale(image);
         BufferedImage gaussianImage = applyGaussianBlur(grayImage);
+        BufferedImage sobelImage[] = applySobelOperator(gaussianImage);
 
         return gaussianImage;
     }
@@ -87,14 +91,56 @@ public class PencilDetector {
         return blurredImage;
     }
 
-    public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Input File Name");
+    private static BufferedImage[] applySobelOperator(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-         String input = s.nextLine();
+        BufferedImage gradientMagnitudeImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+        BufferedImage gradientDirectionImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+
+        // Sobel kernels
+        int[][] sobelX = {
+                {-1, 0, 1},
+                {-2, 0, 2},
+                {-1, 0, 1}
+        };
+
+        int[][] sobelY = {
+                {-1, -2, -1},
+                {0, 0, 0},
+                {1, 2, 1}
+        };
+
+        for (int y = 1; y < height - 1; y++) {
+            for (int x = 1; x < width - 1; x++) {
+                int gx = 0;
+                int gy = 0;
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        int pixel = image.getRGB(x + i, y + j) & 0xFF;
+                        gx += sobelX[i + 1][j + 1] * pixel;
+                        gy += sobelY[i + 1][j + 1] * pixel;
+                    }
+                }
+                int gradientMagnitude = (int) Math.round(Math.sqrt(gx * gx + gy * gy));
+                gradientMagnitudeImage.setRGB(x, y, gradientMagnitude << 16 | gradientMagnitude << 8 | gradientMagnitude);
+
+                double gradientDirection = Math.atan2(gy, gx);
+                int direction = (int) Math.round(Math.toDegrees(gradientDirection));
+                gradientDirectionImage.setRGB(x, y, direction << 16 | direction << 8 | direction);
+            }
+        }
+
+        return new BufferedImage[]{gradientMagnitudeImage, gradientDirectionImage};
+    }
+
+    public static void main(String[] args) {
 
         try {
-            BufferedImage image = readImage(input);
+            Scanner s = new Scanner(System.in);
+            System.out.print("Give file name: ");
+            String fileName = s.nextLine();
+            BufferedImage image = readImage(fileName);
 
             int width = image.getWidth();
             int height = image.getHeight();
@@ -107,7 +153,7 @@ public class PencilDetector {
             BufferedImage resizedImage = resizeImage(image, targetWidth, targetHeight);
             BufferedImage processedImage = processImage(resizedImage);
 
-            File outputImageFile = new File("processed_image.jpg");
+            File outputImageFile = new File("processedImage.jpg");
 
             ImageIO.write(processedImage, "jpg", outputImageFile);
 
@@ -120,3 +166,4 @@ public class PencilDetector {
 
     }
 }
+
