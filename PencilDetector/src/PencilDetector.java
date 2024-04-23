@@ -47,6 +47,25 @@ public class PencilDetector {
 
         return gaussianImage; // Note: Only returns Gaussian-blurred image, ignores Sobel results
     }
+    public static BufferedImage applyThreshold(BufferedImage grayscaleImage, int threshold) {
+        BufferedImage binaryImage = new BufferedImage(grayscaleImage.getWidth(), grayscaleImage.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+        for (int y = 0; y < grayscaleImage.getHeight(); y++) {
+            StringBuilder row = new StringBuilder();
+            for (int x = 0; x < grayscaleImage.getWidth(); x++) {
+                int pixel = grayscaleImage.getRGB(x, y) & 0xFF;
+                if (pixel < threshold) {
+                    binaryImage.setRGB(x, y, Color.BLACK.getRGB());
+                    row.append("#"); // Print '#' for black pixels
+                } else {
+                    binaryImage.setRGB(x, y, Color.WHITE.getRGB());
+                    row.append("."); // Print '.' for white pixels
+                }
+            }
+            System.out.println(row); // Print the row of pixels
+        }
+        return binaryImage;
+    }
+
 
     // Converts an image to grayscale
     private static BufferedImage convertToGrayscale(BufferedImage image) {
@@ -161,6 +180,8 @@ public class PencilDetector {
 
             BufferedImage resizedImage = resizeImage(image, targetWidth, targetHeight);
             BufferedImage processedImage = processImage(resizedImage);
+
+            System.out.println(applyThreshold(processedImage, 135));
 
             File outputImageFile = new File("processedImage.jpg");
 

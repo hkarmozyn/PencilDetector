@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6810e6d2-9933-4886-8baa-4679d5937775" name="Changes" comment="applied sobel operator" />
+    <list default="true" id="6810e6d2-9933-4886-8baa-4679d5937775" name="Changes" comment="Added headers and comments!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PencilDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PencilDetector.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713644972529</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added headers and comments!">
+      <created>1713645542681</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713645542681</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -116,6 +126,7 @@
     <MESSAGE value="added methods to convert to grayscale to help with processing" />
     <MESSAGE value="added images and methods so that the image is converted in the gray scale!" />
     <MESSAGE value="applied sobel operator" />
-    <option name="LAST_COMMIT_MESSAGE" value="applied sobel operator" />
+    <MESSAGE value="Added headers and comments!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added headers and comments!" />
   </component>
 </project>
